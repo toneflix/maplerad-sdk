@@ -120,14 +120,14 @@ Generated resources typically expose method names such as:
 Examples from the current SDK surface:
 
 ```ts
-await sdk.api.customers.create(body)
-await sdk.api.customers.list(query)
-await sdk.api.customers.get({ id })
+await sdk.api.customers.create(body);
+await sdk.api.customers.list(query);
+await sdk.api.customers.get({ id });
 
-await sdk.api.wallets.list()
+await sdk.api.wallets.list();
 
-await sdk.api.transfers.create(body)
-await sdk.api.transfers.get({ transfer_id })
+await sdk.api.transfers.create(body);
+await sdk.api.transfers.get({ transfer_id });
 ```
 
 When you need exact payload and response types for a namespace, import the generated schema type directly from the package.

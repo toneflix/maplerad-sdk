@@ -24,22 +24,28 @@ features:
 
 ## Quick Start
 
-```bash
+::: code-group
+
+```bash [pnpm]
 pnpm add mapplerad-sdk
 ```
+
+```bash [npm]
+npm install mapplerad-sdk
+```
+
+```bash [yarn]
+yarn add mapplerad-sdk
+```
+
+:::
 
 ```ts
 import { createClient } from 'mapplerad-sdk';
 
 const sdk = createClient({
-  clientId: process.env.CLIENT_ID,
-  clientSecret: process.env.CLIENT_SECRET,
-  encryptionKey: process.env.ENCRYPTION_KEY,
   environment: 'sandbox',
-  auth: {
-    type: 'bearer',
-    token: process.env.CLIENT_SECRET!,
-  },
+  clientSecret: process.env.MAPLERAD_CLIENT_SECRET!,
 });
 
 const wallets = await sdk.api.wallets.list();

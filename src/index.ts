@@ -1,7 +1,8 @@
-import type { ExtractedApiDocumentApi } from './Schema'
+import type { AuthConfig, InitOptions, BaseApi as KitBaseApi, Core as KitCore } from '@oapiex/sdk-kit'
+import { createSdk as createBoundSdk, getConfig, updateConfig } from '@oapiex/sdk-kit'
 import { extractedApiDocumentManifest, extractedApiDocumentSdk } from './Schema'
-import { createSdk as createBoundSdk } from '@oapiex/sdk-kit'
-import type { AuthConfig, BaseApi as KitBaseApi, Core as KitCore, InitOptions } from '@oapiex/sdk-kit'
+
+import type { ExtractedApiDocumentApi } from './Schema'
 
 export * from './Schema'
 export { ApiBinder } from './ApiBinder'
@@ -70,8 +71,33 @@ export const securitySchemes = extractedApiDocumentManifest.securitySchemes
 export const security = extractedApiDocumentManifest.security
 export const createClient = (
     options: InitOptions
-): KitCore & { api: KitBaseApi & ExtractedApiDocumentApi } =>
-    createBoundSdk(extractedApiDocumentSdk, options) as KitCore & { api: KitBaseApi & ExtractedApiDocumentApi }
+): KitCore & { api: KitBaseApi & ExtractedApiDocumentApi } => {
+    const config = getConfig()
+    options = {
+        ...options,
+        auth: {
+            type: 'bearer',
+            token: config.clientSecret ?? (config.auth as any)?.token ?? (options.auth as any)?.token ?? options.clientSecret ?? process.env.MAPLERAD_CLIENT_SECRET!,
+            ...config.auth,
+            ...options.auth,
+        } as never,
+        urls: {
+            live: 'https://api.maplerad.com',
+            sandbox: 'https://api.maplerad.com',
+            ...config.urls,
+            ...options.urls,
+        },
+    }
+
+    return createBoundSdk(extractedApiDocumentSdk, options) as KitCore & { api: KitBaseApi & ExtractedApiDocumentApi }
+}
+
+updateConfig({
+    urls: {
+        live: 'https://api.maplerad.com',
+        sandbox: 'https://api.maplerad.com',
+    },
+})
 
 export {
     BadRequestException,
@@ -82,6 +108,7 @@ export {
     UnauthorizedRequestException,
     WebhookValidator,
     createSdk,
+    defineConfig,
 } from '@oapiex/sdk-kit'
 
 export type {

@@ -16,7 +16,7 @@ import type {
   Transfer,
   TransferCreateInput,
   WalletList,
-} from 'mapplerad-sdk'
+} from 'mapplerad-sdk';
 ```
 
 Use these exported types whenever you build payloads or persist API responses in your own code.
@@ -60,7 +60,7 @@ import {
   type CustomerInput,
   type InitOptions,
   UnauthorizedRequestException,
-} from 'mapplerad-sdk'
+} from 'mapplerad-sdk';
 
 const options: InitOptions = {
   environment: 'sandbox',
@@ -68,22 +68,22 @@ const options: InitOptions = {
     type: 'bearer',
     token: process.env.CLIENT_SECRET!,
   },
-}
+};
 
-const sdk = createClient(options)
+const sdk = createClient(options);
 
 const customer: CustomerInput = {
   first_name: 'Ada',
   last_name: 'Lovelace',
   email: 'ada@example.com',
   country: 'NG',
-}
+};
 
 try {
-  await sdk.api.customers.create(customer)
+  await sdk.api.customers.create(customer);
 } catch (error) {
   if (error instanceof UnauthorizedRequestException) {
-    console.error('Authentication failed')
+    console.error('Authentication failed');
   }
 }
 ```

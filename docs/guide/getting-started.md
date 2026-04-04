@@ -6,9 +6,21 @@ outline: deep
 
 ## Installation
 
-```bash
+::: code-group
+
+```bash [pnpm]
 pnpm add mapplerad-sdk
 ```
+
+```bash [npm]
+npm install mapplerad-sdk
+```
+
+```bash [yarn]
+yarn add mapplerad-sdk
+```
+
+:::
 
 ## Entry Points
 
@@ -25,14 +37,8 @@ Both approaches expose the same grouped API namespaces under `client.api`.
 import { createClient } from 'mapplerad-sdk';
 
 export const sdk = createClient({
-  clientId: process.env.CLIENT_ID,
-  clientSecret: process.env.CLIENT_SECRET,
-  encryptionKey: process.env.ENCRYPTION_KEY,
   environment: 'sandbox',
-  auth: {
-    type: 'bearer',
-    token: process.env.CLIENT_SECRET!,
-  },
+  clientSecret: process.env.MAPLERAD_CLIENT_SECRET!,
 });
 ```
 
@@ -42,14 +48,8 @@ export const sdk = createClient({
 import { Core } from 'mapplerad-sdk';
 
 const sdk = new Core({
-  clientId: process.env.CLIENT_ID,
-  clientSecret: process.env.CLIENT_SECRET,
-  encryptionKey: process.env.ENCRYPTION_KEY,
   environment: 'sandbox',
-  auth: {
-    type: 'bearer',
-    token: process.env.CLIENT_SECRET!,
-  },
+  clientSecret: process.env.MAPLERAD_CLIENT_SECRET!,
 });
 ```
 
@@ -67,6 +67,8 @@ The SDK re-exports `InitOptions` from `@oapiex/sdk-kit`. The main options are:
 - `auth`: one or more auth strategies.
 - `debugLevel`: HTTP debug verbosity.
 
+For a fuller breakdown of how these values map to a real project setup, see [Configuration](/guide/configuration).
+
 ## Authentication
 
 The generated local configuration uses bearer authentication. A practical default looks like this:
@@ -74,10 +76,7 @@ The generated local configuration uses bearer authentication. A practical defaul
 ```ts
 const sdk = createClient({
   environment: 'sandbox',
-  auth: {
-    type: 'bearer',
-    token: process.env.CLIENT_SECRET!,
-  },
+  clientSecret: process.env.MAPLERAD_CLIENT_SECRET!,
 });
 ```
 
@@ -92,9 +91,7 @@ console.log(wallets);
 ## Environment Variables
 
 ```bash
-CLIENT_ID=your_public_key
-CLIENT_SECRET=your_secret_key
-ENCRYPTION_KEY=your_encryption_key
+MAPLERAD_CLIENT_SECRET=your_secret_key
 ```
 
 Keep secrets on the server side. If you use this SDK inside an app with a browser runtime, route calls through your backend instead of exposing credentials to end users.

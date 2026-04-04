@@ -9,22 +9,19 @@ outline: deep
 Use `createClient` when you want the smallest amount of setup code.
 
 ```ts
-import { createClient } from 'mapplerad-sdk'
+import { createClient } from 'mapplerad-sdk';
 
 const sdk = createClient({
   environment: 'sandbox',
-  auth: {
-    type: 'bearer',
-    token: process.env.CLIENT_SECRET!,
-  },
-})
+  clientSecret: process.env.MAPLERAD_CLIENT_SECRET!,
+});
 
 const customer = await sdk.api.customers.create({
   first_name: 'Ada',
   last_name: 'Lovelace',
   email: 'ada@example.com',
   country: 'NG',
-})
+});
 ```
 
 ## Class-Based Client
@@ -32,17 +29,14 @@ const customer = await sdk.api.customers.create({
 Use `Core` if you want a named SDK instance that can be passed around explicitly.
 
 ```ts
-import { Core } from 'mapplerad-sdk'
+import { Core } from 'mapplerad-sdk';
 
 const sdk = new Core({
   environment: 'sandbox',
-  auth: {
-    type: 'bearer',
-    token: process.env.CLIENT_SECRET!,
-  },
-})
+  clientSecret: process.env.MAPLERAD_CLIENT_SECRET!,
+});
 
-const customer = await sdk.api.customers.get({ id: 'cus_123' })
+const customer = await sdk.api.customers.get({ id: 'cus_123' });
 ```
 
 ## Namespaced APIs
@@ -69,23 +63,23 @@ import {
   createClient,
   type CustomerInput,
   type TransferCreateInput,
-} from 'mapplerad-sdk'
+} from 'mapplerad-sdk';
 
-const sdk = createClient({})
+const sdk = createClient({});
 
 const customerPayload: CustomerInput = {
   first_name: 'Ada',
   last_name: 'Lovelace',
   email: 'ada@example.com',
   country: 'NG',
-}
+};
 
 const transferPayload: TransferCreateInput = {
   amount: 5000,
-} as TransferCreateInput
+} as TransferCreateInput;
 
-await sdk.api.customers.create(customerPayload)
-await sdk.api.transfers.create(transferPayload)
+await sdk.api.customers.create(customerPayload);
+await sdk.api.transfers.create(transferPayload);
 ```
 
 ## Default Headers and Timeouts
@@ -96,11 +90,8 @@ const sdk = createClient({
   headers: {
     'x-request-id': crypto.randomUUID(),
   },
-  auth: {
-    type: 'bearer',
-    token: process.env.CLIENT_SECRET!,
-  },
-})
+  clientSecret: process.env.MAPLERAD_CLIENT_SECRET!,
+});
 ```
 
 Use per-request idempotency or tracing headers in your integration layer when you are calling payment or transfer-like endpoints.
@@ -110,19 +101,19 @@ Use per-request idempotency or tracing headers in your integration layer when yo
 The package re-exports HTTP exception classes from `@oapiex/sdk-kit`.
 
 ```ts
-import { HttpException, UnauthorizedRequestException } from 'mapplerad-sdk'
+import { HttpException, UnauthorizedRequestException } from 'mapplerad-sdk';
 
 try {
-  await sdk.api.wallets.list()
+  await sdk.api.wallets.list();
 } catch (error) {
   if (error instanceof UnauthorizedRequestException) {
     // refresh or rotate credentials
   }
 
   if (error instanceof HttpException) {
-    console.error(error.message)
+    console.error(error.message);
   }
 
-  throw error
+  throw error;
 }
 ```

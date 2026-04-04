@@ -11,31 +11,33 @@ pnpm add MappleradSdk
 ## Quick Start
 
 ```ts
-import { Core, createClient, type ActiveInput, type ActiveParams } from 'MappleradSdk'
+import {
+  Core,
+  createClient,
+  type ActiveInput,
+  type ActiveParams,
+} from 'MappleradSdk';
 
 const sdk = new Core({
-  clientId: process.env.CLIENT_ID!,
-  clientSecret: process.env.CLIENT_SECRET!,
+  clientId: process.env.MAPLERAD_CLIENT_ID!,
+  clientSecret: process.env.MAPLERAD_CLIENT_SECRET!,
   environment: 'sandbox',
-})
+});
 
-await sdk.api.activeCustomers.create(
-  {} as ActiveParams,
-  {} as ActiveInput,
-)
+await sdk.api.activeCustomers.create({} as ActiveParams, {} as ActiveInput);
 
 // --- OR ---
 
 const runtimeSdk = createClient({
-  clientId: process.env.CLIENT_ID!,
-  clientSecret: process.env.CLIENT_SECRET!,
+  clientId: process.env.MAPLERAD_CLIENT_ID!,
+  clientSecret: process.env.MAPLERAD_CLIENT_SECRET!,
   environment: 'sandbox',
-})
+});
 
 await runtimeSdk.api.activeCustomers.create(
   {} as ActiveParams,
   {} as ActiveInput,
-)
+);
 ```
 
 ## Main Exports

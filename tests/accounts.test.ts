@@ -57,4 +57,21 @@ describe('generated sdk exports', () => {
             email: customer!.email,
         })
     })
-})
+
+    it('can be initialized with Core class', async () => {
+        const core = new sdk.Core({
+            clientSecret: process.env.MAPLERAD_CLIENT_SECRET!,
+            environment: 'sandbox',
+        })
+
+        expect(core).toBeInstanceOf(sdk.Core)
+        const response = await core.api.customers.get({
+            id: customer!.id!
+        })
+
+        expect(response).toMatchObject({
+            id: customer!.id,
+            email: customer!.email,
+        })
+    })
+}, 10000)
