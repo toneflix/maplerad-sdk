@@ -2,11 +2,14 @@
   "name": "mapplerad-sdk",
   "type": "module",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "description": "Unofficial NodeJs SDK for Maplerad's API.",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.cts",
+  "publishConfig": {
+    "access": "public"
+  },
   "exports": {
     ".": {
       "import": "./dist/index.mjs",
