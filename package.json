@@ -1,0 +1,40 @@
+{
+  "name": "mapplerad-sdk",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Unofficial NodeJs SDK for Maplerad's API.",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.cts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "pnpm vitest --run",
+    "test:watch": "pnpm vitest",
+    "build": "tsdown",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
+  },
+  "dependencies": {
+    "@h3ravel/shared": "^0.27.13",
+    "@oapiex/sdk-kit": "^0.1.12"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^10.4.0",
+    "@types/node": "^20.14.5",
+    "tsdown": "^0.20.1",
+    "typescript": "^5.4.5",
+    "vitepress": "^1.6.4",
+    "vitest": "^3.2.4"
+  }
+}

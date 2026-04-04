@@ -1,0 +1,128 @@
+---
+outline: deep
+---
+
+# Usage Patterns
+
+## Runtime-First Client
+
+Use `createClient` when you want the smallest amount of setup code.
+
+```ts
+import { createClient } from 'mapplerad-sdk'
+
+const sdk = createClient({
+  environment: 'sandbox',
+  auth: {
+    type: 'bearer',
+    token: process.env.CLIENT_SECRET!,
+  },
+})
+
+const customer = await sdk.api.customers.create({
+  first_name: 'Ada',
+  last_name: 'Lovelace',
+  email: 'ada@example.com',
+  country: 'NG',
+})
+```
+
+## Class-Based Client
+
+Use `Core` if you want a named SDK instance that can be passed around explicitly.
+
+```ts
+import { Core } from 'mapplerad-sdk'
+
+const sdk = new Core({
+  environment: 'sandbox',
+  auth: {
+    type: 'bearer',
+    token: process.env.CLIENT_SECRET!,
+  },
+})
+
+const customer = await sdk.api.customers.get({ id: 'cus_123' })
+```
+
+## Namespaced APIs
+
+The generated binder groups endpoints under `sdk.api`. A few common namespaces are:
+
+- `sdk.api.customers`
+- `sdk.api.customerAccounts`
+- `sdk.api.wallets`
+- `sdk.api.transfers`
+- `sdk.api.virtualAccountCustomers`
+- `sdk.api.utilityBills`
+- `sdk.api.issuings`
+- `sdk.api.subscriptions`
+
+Each namespace exposes only the methods generated for that resource, such as `create`, `list`, or `get`.
+
+## Working With Types
+
+The package exports schema types directly, so you can type request payloads and responses without maintaining your own copies.
+
+```ts
+import {
+  createClient,
+  type CustomerInput,
+  type TransferCreateInput,
+} from 'mapplerad-sdk'
+
+const sdk = createClient({})
+
+const customerPayload: CustomerInput = {
+  first_name: 'Ada',
+  last_name: 'Lovelace',
+  email: 'ada@example.com',
+  country: 'NG',
+}
+
+const transferPayload: TransferCreateInput = {
+  amount: 5000,
+} as TransferCreateInput
+
+await sdk.api.customers.create(customerPayload)
+await sdk.api.transfers.create(transferPayload)
+```
+
+## Default Headers and Timeouts
+
+```ts
+const sdk = createClient({
+  timeout: 15_000,
+  headers: {
+    'x-request-id': crypto.randomUUID(),
+  },
+  auth: {
+    type: 'bearer',
+    token: process.env.CLIENT_SECRET!,
+  },
+})
+```
+
+Use per-request idempotency or tracing headers in your integration layer when you are calling payment or transfer-like endpoints.
+
+## Error Handling
+
+The package re-exports HTTP exception classes from `@oapiex/sdk-kit`.
+
+```ts
+import { HttpException, UnauthorizedRequestException } from 'mapplerad-sdk'
+
+try {
+  await sdk.api.wallets.list()
+} catch (error) {
+  if (error instanceof UnauthorizedRequestException) {
+    // refresh or rotate credentials
+  }
+
+  if (error instanceof HttpException) {
+    console.error(error.message)
+  }
+
+  throw error
+}
+```
