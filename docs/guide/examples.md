@@ -4,6 +4,8 @@ outline: deep
 
 # Examples
 
+These examples use the same initialization and customer flow patterns described throughout this guide, then branch into other common namespaces.
+
 ## Create and Fetch a Customer
 
 ```ts
@@ -84,4 +86,19 @@ export const mapplerad = createClient({
 export async function fetchWallets() {
   return mapplerad.api.wallets.list();
 }
+```
+
+## Initialize With Core
+
+```ts
+import { Core } from 'mapplerad-sdk';
+
+const sdk = new Core({
+  clientSecret: process.env.MAPLERAD_CLIENT_SECRET!,
+  environment: 'sandbox',
+});
+
+const customer = await sdk.api.customers.get({
+  id: 'cus_123',
+});
 ```

@@ -4,6 +4,8 @@ outline: deep
 
 # Usage Patterns
 
+These patterns reflect common ways to use the SDK in a real integration service.
+
 ## Runtime-First Client
 
 Use `createClient` when you want the smallest amount of setup code.
@@ -24,6 +26,12 @@ const customer = await sdk.api.customers.create({
 });
 ```
 
+If you have already defined defaults in `oapiex.config.js`, this also works:
+
+```ts
+const sdk = createClient({});
+```
+
 ## Class-Based Client
 
 Use `Core` if you want a named SDK instance that can be passed around explicitly.
@@ -39,6 +47,8 @@ const sdk = new Core({
 const customer = await sdk.api.customers.get({ id: 'cus_123' });
 ```
 
+This style is useful when you want to pass a concrete SDK instance through service constructors or shared modules.
+
 ## Namespaced APIs
 
 The generated binder groups endpoints under `sdk.api`. A few common namespaces are:
@@ -53,6 +63,8 @@ The generated binder groups endpoints under `sdk.api`. A few common namespaces a
 - `sdk.api.subscriptions`
 
 Each namespace exposes only the methods generated for that resource, such as `create`, `list`, or `get`.
+
+For detailed descriptions of each namespace, move to the [API section](/api/overview).
 
 ## Working With Types
 
@@ -116,4 +128,22 @@ try {
 
   throw error;
 }
+```
+
+## Customer Flow
+
+This simple create, list, and fetch flow is useful when you want to verify your credentials and environment:
+
+```ts
+const client = createClient({});
+
+const created = await client.api.customers.create({
+  first_name: 'Ada',
+  last_name: 'Lovelace',
+  email: 'ada@example.com',
+  country: 'NG',
+});
+
+const list = await client.api.customers.list({});
+const customer = await client.api.customers.get({ id: created.id! });
 ```

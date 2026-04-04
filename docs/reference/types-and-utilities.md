@@ -4,6 +4,8 @@ outline: deep
 
 # Types and Utilities
 
+The Mapplerad SDK is built on top of [`@oapiex/sdk-kit`](https://toneflix.github.io/oapiex/reference/sdk-kit), which provides the shared runtime primitives behind `Core`, `createClient`, request transport, auth handling, and manifest binding. If you want more context on the lower-level runtime layer, supported auth strategies, or SDK kit exports, the upstream SDK Kit reference is the right place to continue.
+
 ## Generated Schema Types
 
 The package re-exports the generated schema module, which includes request payloads, query types, params, response models, and supporting schema types.
@@ -29,6 +31,8 @@ The SDK re-exports core setup types from `@oapiex/sdk-kit`:
 - `AuthConfig`
 - `UnifiedResponse`
 - `XGenericObject`
+
+For the full SDK kit configuration model and runtime behavior, see the [SDK Kit reference](https://toneflix.github.io/oapiex/reference/sdk-kit).
 
 ## HTTP and Error Utilities
 
