@@ -3,7 +3,7 @@
   "type": "module",
   "version": "0.1.0",
   "private": false,
-  "description": "Unofficial NodeJs SDK for Maplerad's API.",
+  "description": "NodeJs SDK for Maplerad API.",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.cts",
