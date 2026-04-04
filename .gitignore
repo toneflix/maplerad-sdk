@@ -8,3 +8,4 @@
 /.env.*.local
 /docs/.vitepress/dist
 /docs/.vitepress/cache
+oapiex.config.js
