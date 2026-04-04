@@ -7,7 +7,7 @@
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.cts",
-  "homepage": "https://mapplerad.toneflix.net",
+  "homepage": "https://toneflix.github.io/mapplerad-sdk",
   "repository": {
     "url": "https://github.com/toneflix/mapplerad-sdk.git",
     "type": "git"
