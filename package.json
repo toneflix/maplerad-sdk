@@ -29,6 +29,7 @@
     "test": "pnpm vitest --run",
     "test:watch": "pnpm vitest",
     "build": "tsdown",
+    "lint": "eslint . --ext .ts",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs"
@@ -38,10 +39,14 @@
     "@oapiex/sdk-kit": "^0.1.12"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@eslint/markdown": "^8.0.1",
     "@faker-js/faker": "^10.4.0",
     "@types/node": "^20.14.5",
+    "eslint": "^10.2.0",
     "tsdown": "^0.20.1",
     "typescript": "^5.4.5",
+    "typescript-eslint": "^8.58.0",
     "vitepress": "^1.6.4",
     "vitest": "^3.2.4"
   }

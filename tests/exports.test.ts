@@ -8,6 +8,7 @@ describe('generated sdk exports', () => {
         expect(sdk.Core).toBeTypeOf('function')
         expect(sdk.createClient).toBeTypeOf('function')
         expect(sdk.createSdk).toBeTypeOf('function')
+        expect(sdk.defineConfig).toBeTypeOf('function')
         expect(sdk.extractedApiDocumentSdk).toBeDefined()
         expect(sdk.extractedApiDocumentManifest).toBeDefined()
     })

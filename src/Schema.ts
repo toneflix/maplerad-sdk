@@ -6541,7 +6541,7 @@ export const extractedApiDocument: ExtractedApiDocument = {
                   dob: {
                     type: 'string',
                     description:
-                      "The customer's date of birth in the format DD-MM-YYYY",
+                      'The customer\'s date of birth in the format DD-MM-YYYY',
                     default: '24-05-1983',
                   },
                   phone: {
@@ -8754,7 +8754,7 @@ export const extractedApiDocument: ExtractedApiDocument = {
                   funding_source: {
                     type: 'string',
                     description:
-                      "The funding source is used to select the wallet to be debited for the transfer. The destination coin's equivalent value is debited from the source currency and exchanged to fund the transfer. USD is the only acceptable value for this field.",
+                      'The funding source is used to select the wallet to be debited for the transfer. The destination coin\'s equivalent value is debited from the source currency and exchanged to fund the transfer. USD is the only acceptable value for this field.',
                   },
                 },
                 required: ['amount', 'address', 'chain', 'coin'],
@@ -9736,7 +9736,7 @@ export const extractedApiDocument: ExtractedApiDocument = {
                   },
                   bank_code: {
                     type: 'string',
-                    description: "The institution's bank code.",
+                    description: 'The institution\'s bank code.',
                     default: '123',
                   },
                   currency: {
@@ -10181,7 +10181,7 @@ export const extractedApiDocument: ExtractedApiDocument = {
                       },
                       employment_status: {
                         type: 'string',
-                        description: "The individual's employment status",
+                        description: 'The individual\'s employment status',
                         default: 'EMPLOYED',
                       },
                       employment_description: {
@@ -10190,7 +10190,7 @@ export const extractedApiDocument: ExtractedApiDocument = {
                       },
                       nationality: {
                         type: 'string',
-                        description: "ISO code of individual's nationality",
+                        description: 'ISO code of individual\'s nationality',
                         default: 'NG',
                       },
                       employer_name: {
@@ -10210,7 +10210,7 @@ export const extractedApiDocument: ExtractedApiDocument = {
                           identification_country: {
                             type: 'string',
                             description:
-                              "ISO 3166-1 alpha-2 of individual's nationality",
+                              'ISO 3166-1 alpha-2 of individual\'s nationality',
                             default: 'NG',
                           },
                           identification_image_front: {
@@ -10223,7 +10223,7 @@ export const extractedApiDocument: ExtractedApiDocument = {
                           identification_image_back: {
                             type: 'string',
                             description:
-                              "The customer's International identification image back, It accepts a data in URI (Uniform Resource Identifier) base64 string",
+                              'The customer\'s International identification image back, It accepts a data in URI (Uniform Resource Identifier) base64 string',
                             default:
                               'data:(image|application)/(jpeg|jpg|png|heic|heif|pdf);base64,(valid_base_64_data)',
                           },
@@ -10414,10 +10414,10 @@ export const extractedApiDocument: ExtractedApiDocument = {
                           items: {
                             type: 'string',
                             example:
-                              "The proof of address submitted does not include the customer's name. Please submit a proof of address with the customer's name, issued within the last 90 days.",
+                              'The proof of address submitted does not include the customer\'s name. Please submit a proof of address with the customer\'s name, issued within the last 90 days.',
                           },
                           example: [
-                            "The proof of address submitted does not include the customer's name. Please submit a proof of address with the customer's name, issued within the last 90 days.",
+                            'The proof of address submitted does not include the customer\'s name. Please submit a proof of address with the customer\'s name, issued within the last 90 days.',
                           ],
                         },
                         currency: {
@@ -10434,7 +10434,7 @@ export const extractedApiDocument: ExtractedApiDocument = {
                         account_id: '301977d2-a013-41ad-abe3-809b667e1101',
                         status: 'APPROVED',
                         message: [
-                          "The proof of address submitted does not include the customer's name. Please submit a proof of address with the customer's name, issued within the last 90 days.",
+                          'The proof of address submitted does not include the customer\'s name. Please submit a proof of address with the customer\'s name, issued within the last 90 days.',
                         ],
                         currency: 'USD',
                         kyc_link: 'https://maplerad.com',
@@ -10449,7 +10449,7 @@ export const extractedApiDocument: ExtractedApiDocument = {
                       account_id: '301977d2-a013-41ad-abe3-809b667e1101',
                       status: 'APPROVED',
                       message: [
-                        "The proof of address submitted does not include the customer's name. Please submit a proof of address with the customer's name, issued within the last 90 days.",
+                        'The proof of address submitted does not include the customer\'s name. Please submit a proof of address with the customer\'s name, issued within the last 90 days.',
                       ],
                       currency: 'USD',
                       kyc_link: 'https://maplerad.com',
@@ -10464,7 +10464,7 @@ export const extractedApiDocument: ExtractedApiDocument = {
                     account_id: '301977d2-a013-41ad-abe3-809b667e1101',
                     status: 'APPROVED',
                     message: [
-                      "The proof of address submitted does not include the customer's name. Please submit a proof of address with the customer's name, issued within the last 90 days.",
+                      'The proof of address submitted does not include the customer\'s name. Please submit a proof of address with the customer\'s name, issued within the last 90 days.',
                     ],
                     currency: 'USD',
                     kyc_link: 'https://maplerad.com',
@@ -11139,7 +11139,7 @@ export const extractedApiDocument: ExtractedApiDocument = {
                   },
                   email: {
                     type: 'string',
-                    description: "The individual's email address.",
+                    description: 'The individual\'s email address.',
                     default: 'johndoe@testmail.com',
                   },
                   description: {
@@ -11221,7 +11221,7 @@ export const extractedApiDocument: ExtractedApiDocument = {
                       institution_name: {
                         type: 'string',
                         description:
-                          "The banking institution's name of the counterparty.",
+                          'The banking institution\'s name of the counterparty.',
                         default: 'Bank of the Lakes',
                       },
                       institution_address: {
@@ -12419,7 +12419,7 @@ export const extractedApiDocument: ExtractedApiDocument = {
                   name: {
                     type: 'string',
                     description:
-                      "The business name, don't add special characters in the name.",
+                      'The business name, don\'t add special characters in the name.',
                     default: 'JANE DOE ENTERPRISES',
                   },
                   type: {
@@ -12550,7 +12550,7 @@ export const extractedApiDocument: ExtractedApiDocument = {
                   amount: {
                     type: 'integer',
                     description:
-                      "The amount in the lowest denomination of the card's currency; cents for USD, kobo for NGN. The amount that will be credited into the card. e.g $1 = 100",
+                      'The amount in the lowest denomination of the card\'s currency; cents for USD, kobo for NGN. The amount that will be credited into the card. e.g $1 = 100',
                     default: '10000',
                   },
                 },
@@ -12650,7 +12650,7 @@ export const extractedApiDocument: ExtractedApiDocument = {
                   amount: {
                     type: 'integer',
                     description:
-                      "The amount in the lowest denomination of the card's currency; cents for USD, kobo for NGN. The amount that will be debited from the card. e.g $1 = 100",
+                      'The amount in the lowest denomination of the card\'s currency; cents for USD, kobo for NGN. The amount that will be debited from the card. e.g $1 = 100',
                   },
                 },
                 required: ['amount'],
@@ -16446,12 +16446,12 @@ export const extractedApiDocument: ExtractedApiDocument = {
                   bank_code: {
                     type: 'string',
                     description:
-                      "The institution's (usually) three-digits code.",
+                      'The institution\'s (usually) three-digits code.',
                   },
                   account_number: {
                     type: 'string',
                     description:
-                      "The recipient's NUBAN. It must match appropriately with the bank_code.",
+                      'The recipient\'s NUBAN. It must match appropriately with the bank_code.',
                   },
                   amount: {
                     type: 'integer',

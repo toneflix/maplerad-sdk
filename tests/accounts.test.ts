@@ -2,11 +2,11 @@ import * as sdk from '../src/index'
 
 import { beforeAll, describe, expect, it } from 'vitest'
 
-import { faker } from '@faker-js/faker';
+import { faker } from '@faker-js/faker'
 
 describe('generated sdk exports', () => {
     let customer: sdk.Customer | undefined
-    let user: any;
+    let user: any
     const client = sdk.createClient({})
 
     beforeAll(() => {

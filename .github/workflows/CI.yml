@@ -1,0 +1,56 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20.x, 22.x, 24.x, 25.x]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --no-frozen-lockfile
+
+      - name: Run linter
+        run: pnpm lint
+
+      - name: Run tests and generate coverage
+        run: pnpm coverage
+        env:
+          MAPLERAD_CLIENT_ID: ${{ secrets.MAPLERAD_CLIENT_ID }}
+          MAPLERAD_CLIENT_SECRET: ${{ secrets.MAPLERAD_CLIENT_SECRET }}
+          MAPLERAD_ENCRYPTION_KEY: ${{ secrets.MAPLERAD_ENCRYPTION_KEY }}
+          MAPLERAD_SECRET_HASH: ${{ secrets.MAPLERAD_SECRET_HASH }}
+          MAPLERAD_ENVIRONMENT: 'sandbox'
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          slug: toneflix/mapplerad-sdk

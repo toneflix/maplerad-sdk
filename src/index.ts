@@ -1,4 +1,4 @@
-import type { AuthConfig, InitOptions, BaseApi as KitBaseApi, Core as KitCore } from '@oapiex/sdk-kit'
+import type { InitOptions, BaseApi as KitBaseApi, Core as KitCore } from '@oapiex/sdk-kit'
 import { createSdk as createBoundSdk, getConfig, updateConfig } from '@oapiex/sdk-kit'
 import { extractedApiDocumentManifest, extractedApiDocumentSdk } from './Schema'
 
