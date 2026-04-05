@@ -56,7 +56,7 @@ export const sdk = createClient({
 });
 ```
 
-If you keep your defaults in `oapiex.config.js`, you can also initialize with an empty options object:
+If you keep your defaults in `maplerad.config.js`, you can also initialize with an empty options object:
 
 ```ts
 import { createClient } from 'maplerad-sdk';

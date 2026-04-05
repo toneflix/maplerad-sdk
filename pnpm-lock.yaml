@@ -12,8 +12,8 @@ importers:
         specifier: ^0.27.13
         version: 0.27.13(@types/node@20.19.39)
       '@oapiex/sdk-kit':
-        specifier: ^0.1.12
-        version: 0.1.12(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2)(typescript@5.9.3)(unrun@0.2.34(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2))
+        specifier: ^0.1.13
+        version: 0.1.13(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2)(typescript@5.9.3)(unrun@0.2.34(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2))
     devDependencies:
       '@eslint/js':
         specifier: ^10.0.1
@@ -748,8 +748,8 @@ packages:
       '@emnapi/core': ^1.7.1
       '@emnapi/runtime': ^1.7.1
 
-  '@oapiex/sdk-kit@0.1.12':
-    resolution: {integrity: sha512-oy+bMGjNxjhxDj1Y9iKZyeyPecbHWscJWEEucYnIV94VgxCFQYLT0iqtr7u1hXdC3cACzg1UrnVL2+wLC5z/mQ==}
+  '@oapiex/sdk-kit@0.1.13':
+    resolution: {integrity: sha512-U5Se30FOwulx13w+ie3Q1kc5PoWkhBGS9S32MbEMhRdrMsC7t/GcTSG8U+4+gd9+knKt5811M/KPLMlK8oKphQ==}
 
   '@oxc-project/types@0.112.0':
     resolution: {integrity: sha512-m6RebKHIRsax2iCwVpYW2ErQwa4ywHJrE4sCK3/8JK8ZZAWOKXaRJFl/uP51gaVyyXlaS4+chU1nSCdzYf6QqQ==}
@@ -3596,7 +3596,7 @@ snapshots:
       '@tybys/wasm-util': 0.10.1
     optional: true
 
-  '@oapiex/sdk-kit@0.1.12(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2)(typescript@5.9.3)(unrun@0.2.34(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2))':
+  '@oapiex/sdk-kit@0.1.13(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2)(typescript@5.9.3)(unrun@0.2.34(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2))':
     dependencies:
       axios: 1.14.0
       dotenv: 17.4.0

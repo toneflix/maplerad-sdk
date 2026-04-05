@@ -1,7 +1,7 @@
 {
   "name": "maplerad-sdk",
   "type": "module",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": false,
   "description": "NodeJs SDK for Maplerad API.",
   "main": "./dist/index.cjs",
@@ -37,7 +37,7 @@
   },
   "dependencies": {
     "@h3ravel/shared": "^0.27.13",
-    "@oapiex/sdk-kit": "^0.1.12"
+    "@oapiex/sdk-kit": "^0.1.13"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

@@ -26,7 +26,7 @@ const customer = await sdk.api.customers.create({
 });
 ```
 
-If you have already defined defaults in `oapiex.config.js`, this also works:
+If you have already defined defaults in `maplerad.config.js`, this also works:
 
 ```ts
 const sdk = createClient({});

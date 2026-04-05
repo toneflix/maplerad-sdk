@@ -12,7 +12,7 @@ The SDK accepts configuration through the `InitOptions` object used by `createCl
 
 ## Configuration File
 
-You can create an `oapiex.config.js` file at the root of your project to centralize SDK configuration. The file should use `defineConfig` from `@oapiex/sdk-kit` and can be as minimal or as explicit as you need.
+You can create an `maplerad.config.js` file at the root of your project to centralize SDK configuration. The file should use `defineConfig` from `@oapiex/sdk-kit` and can be as minimal or as explicit as you need.
 
 If you want the full list of runtime configuration behaviors, auth strategies, access validation patterns, or SDK kit exports that power this SDK, see the [`@oapiex/sdk-kit` reference](https://toneflix.github.io/oapiex/reference/sdk-kit).
 
@@ -187,7 +187,7 @@ export const maplerad = createClient({
 
 ## Runtime Overrides
 
-You can still override configuration at client construction time even if you keep defaults in `oapiex.config.js`:
+You can still override configuration at client construction time even if you keep defaults in `maplerad.config.js`:
 
 ```ts
 import { createClient } from 'maplerad-sdk';

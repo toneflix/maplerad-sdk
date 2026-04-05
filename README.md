@@ -55,7 +55,7 @@ const customer = await sdk.api.customers.get({ id: 'cus_123' });
 
 ## Minimal Configuration
 
-You can keep SDK defaults in `oapiex.config.js` using `defineConfig` from `@oapiex/sdk-kit`:
+You can keep SDK defaults in `maplerad.config.js` using `defineConfig` from `@oapiex/sdk-kit`:
 
 ```js
 import { defineConfig } from '@oapiex/sdk-kit';

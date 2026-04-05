@@ -15,7 +15,7 @@
     "./eslint.config.ts",
     "./tsdown.config.ts",
     "./vitest.config.ts",
-    "./oapiex.config.js"
+    "maplerad.config.js"
   ],
   "include": ["./src/**/*", "./tests/**/*"],
   "exclude": ["./dist", "./node_modules"]

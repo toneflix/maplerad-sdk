@@ -1,5 +1,5 @@
 import type { InitOptions, BaseApi as KitBaseApi, Core as KitCore } from '@oapiex/sdk-kit'
-import { createSdk as createBoundSdk, getConfig, updateConfig } from '@oapiex/sdk-kit'
+import { createSdk as createBoundSdk, getConfig, setConfigFileBasename, updateConfig } from '@oapiex/sdk-kit'
 import { extractedApiDocumentManifest, extractedApiDocumentSdk } from './Schema'
 
 import type { ExtractedApiDocumentApi } from './Schema'
@@ -91,6 +91,8 @@ export const createClient = (
 
     return createBoundSdk(extractedApiDocumentSdk, options) as KitCore & { api: KitBaseApi & ExtractedApiDocumentApi }
 }
+
+setConfigFileBasename('maplerad.config')
 
 updateConfig({
     urls: {
