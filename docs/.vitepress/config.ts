@@ -2,7 +2,7 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  base: process.env.GITHUB_ACTIONS ? '/maplerad-sdk/' : '/',
+  base: '/',
   title: 'Maplerad SDK',
   description: 'TypeScript and Node.js SDK for working with the Maplerad API.',
   themeConfig: {

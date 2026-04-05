@@ -13,9 +13,9 @@ This package provides both a class-based client and a runtime-first client for w
 
 ## Documentation
 
-- Docs site: https://toneflix.github.io/maplerad-sdk/
-- API overview: https://toneflix.github.io/maplerad-sdk/api/overview
-- Configuration guide: https://toneflix.github.io/maplerad-sdk/guide/configuration
+- Docs site: https://maplerad.toneflix.net/
+- API overview: https://maplerad.toneflix.net/api/overview
+- Configuration guide: https://maplerad.toneflix.net/guide/configuration
 
 ## Installation
 
@@ -122,7 +122,7 @@ This SDK is built on top of `@oapiex/sdk-kit`, which provides the shared runtime
 
 See the full grouped reference in the docs site:
 
-- https://toneflix.github.io/maplerad-sdk/api/overview
+- https://maplerad.toneflix.net/api/overview
 
 ## Development
 
