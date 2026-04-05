@@ -15,6 +15,12 @@ on:
 
 jobs:
   publish:
+    env:
+      MAPLERAD_CLIENT_ID: ${{ secrets.MAPLERAD_CLIENT_ID }}
+      MAPLERAD_CLIENT_SECRET: ${{ secrets.MAPLERAD_CLIENT_SECRET }}
+      MAPLERAD_ENCRYPTION_KEY: ${{ secrets.MAPLERAD_ENCRYPTION_KEY }}
+      MAPLERAD_SECRET_HASH: ${{ secrets.MAPLERAD_SECRET_HASH }}
+      MAPLERAD_ENVIRONMENT: 'sandbox'
     name: Publish to NPM
     runs-on: ubuntu-latest
     permissions:
