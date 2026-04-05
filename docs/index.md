@@ -2,9 +2,9 @@
 layout: home
 
 hero:
-  name: 'Mapplerad SDK'
+  name: 'Maplerad SDK'
   text: NodeJs SDK for Maplerad API
-  tagline: 'Type-safe, modern SDK for integrating Mapplerad payments, collections, wallets, cards, and identity services into your Node.js applications.'
+  tagline: 'Type-safe, modern SDK for integrating Maplerad payments, collections, wallets, cards, and identity services into your Node.js applications.'
   actions:
     - theme: brand
       text: Get Started
@@ -19,7 +19,7 @@ features:
     details: Customers, wallets, transfers, virtual accounts, bills, FX, crypto, issuing, subscriptions, and supporting lookup endpoints are available through one SDK.
   - icon: 🔒
     title: Type-Safe
-    details: Generated request and response types are exported from the package so you can build against the Mapplerad schema with autocomplete and compile-time checks.
+    details: Generated request and response types are exported from the package so you can build against the Maplerad schema with autocomplete and compile-time checks.
   - icon: 🎯
     title: Intuitive API
     details: Use createClient for quick runtime setup or Core when you want an explicit class instance with the same API binder underneath.
@@ -41,21 +41,21 @@ features:
 ::: code-group
 
 ```bash [pnpm]
-pnpm add mapplerad-sdk
+pnpm add maplerad-sdk
 ```
 
 ```bash [npm]
-npm install mapplerad-sdk
+npm install maplerad-sdk
 ```
 
 ```bash [yarn]
-yarn add mapplerad-sdk
+yarn add maplerad-sdk
 ```
 
 :::
 
 ```ts
-import { createClient } from 'mapplerad-sdk';
+import { createClient } from 'maplerad-sdk';
 
 const sdk = createClient({
   environment: 'sandbox',
@@ -67,7 +67,7 @@ const wallets = await sdk.api.wallets.list();
 
 ## Why Use This SDK?
 
-This SDK is designed for teams that want a direct, typed integration with the Mapplerad API:
+This SDK is designed for teams that want a direct, typed integration with the Maplerad API:
 
 - TypeScript-first request and response models
 - A consistent `sdk.api.*` surface across product areas

@@ -4,7 +4,7 @@ outline: deep
 
 # Configuration
 
-Learn how to configure the Mapplerad SDK for local development, sandbox testing, and production usage.
+Learn how to configure the Maplerad SDK for local development, sandbox testing, and production usage.
 
 ## Overview
 
@@ -43,7 +43,7 @@ export default defineConfig({
     live: 'https://api.maplerad.com',
   },
   headers: {
-    'x-sdk-name': 'mapplerad-sdk',
+    'x-sdk-name': 'maplerad-sdk',
   },
   auth: {
     type: 'bearer',
@@ -175,9 +175,9 @@ Increase this in local development only if you need to inspect HTTP behavior.
 ## Recommended Server-Side Setup
 
 ```ts
-import { createClient } from 'mapplerad-sdk';
+import { createClient } from 'maplerad-sdk';
 
-export const mapplerad = createClient({
+export const maplerad = createClient({
   clientSecret: process.env.MAPLERAD_CLIENT_SECRET!,
   environment: process.env.NODE_ENV === 'production' ? 'live' : 'sandbox',
   timeout: 15_000,
@@ -190,7 +190,7 @@ export const mapplerad = createClient({
 You can still override configuration at client construction time even if you keep defaults in `oapiex.config.js`:
 
 ```ts
-import { createClient } from 'mapplerad-sdk';
+import { createClient } from 'maplerad-sdk';
 
 const sdk = createClient({
   environment: 'sandbox',

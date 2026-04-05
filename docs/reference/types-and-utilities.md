@@ -4,7 +4,7 @@ outline: deep
 
 # Types and Utilities
 
-The Mapplerad SDK is built on top of [`@oapiex/sdk-kit`](https://toneflix.github.io/oapiex/reference/sdk-kit), which provides the shared runtime primitives behind `Core`, `createClient`, request transport, auth handling, and manifest binding. If you want more context on the lower-level runtime layer, supported auth strategies, or SDK kit exports, the upstream SDK Kit reference is the right place to continue.
+The Maplerad SDK is built on top of [`@oapiex/sdk-kit`](https://toneflix.github.io/oapiex/reference/sdk-kit), which provides the shared runtime primitives behind `Core`, `createClient`, request transport, auth handling, and manifest binding. If you want more context on the lower-level runtime layer, supported auth strategies, or SDK kit exports, the upstream SDK Kit reference is the right place to continue.
 
 ## Generated Schema Types
 
@@ -18,7 +18,7 @@ import type {
   Transfer,
   TransferCreateInput,
   WalletList,
-} from 'mapplerad-sdk';
+} from 'maplerad-sdk';
 ```
 
 Use these exported types whenever you build payloads or persist API responses in your own code.
@@ -64,13 +64,13 @@ import {
   type CustomerInput,
   type InitOptions,
   UnauthorizedRequestException,
-} from 'mapplerad-sdk';
+} from 'maplerad-sdk';
 
 const options: InitOptions = {
   environment: 'sandbox',
   auth: {
     type: 'bearer',
-    token: process.env.CLIENT_SECRET!,
+    token: process.env.MAPLERAD_CLIENT_SECRET!,
   },
 };
 

@@ -4,22 +4,22 @@ outline: deep
 
 # Getting Started
 
-This guide will help you install and start using the Mapplerad SDK in a Node.js or TypeScript project.
+This guide will help you install and start using the Maplerad SDK in a Node.js or TypeScript project.
 
 ## Installation
 
 ::: code-group
 
 ```bash [pnpm]
-pnpm add mapplerad-sdk
+pnpm add maplerad-sdk
 ```
 
 ```bash [npm]
-npm install mapplerad-sdk
+npm install maplerad-sdk
 ```
 
 ```bash [yarn]
-yarn add mapplerad-sdk
+yarn add maplerad-sdk
 ```
 
 :::
@@ -31,7 +31,7 @@ yarn add mapplerad-sdk
 At minimum, a simple SDK setup can use `MAPLERAD_CLIENT_SECRET` with the sandbox environment. Depending on your integration, you can also supply `clientId`, `encryptionKey`, custom `auth`, and URL overrides.
 
 ::: warning
-Never expose your Mapplerad secret or any encryption key in client-side code or public repositories.
+Never expose your Maplerad secret or any encryption key in client-side code or public repositories.
 :::
 
 ### 2. Choose an Initialization Style
@@ -48,7 +48,7 @@ Both approaches expose the same grouped API namespaces under `client.api`.
 This is the smallest explicit setup for a direct sandbox integration:
 
 ```ts
-import { createClient } from 'mapplerad-sdk';
+import { createClient } from 'maplerad-sdk';
 
 export const sdk = createClient({
   environment: 'sandbox',
@@ -59,7 +59,7 @@ export const sdk = createClient({
 If you keep your defaults in `oapiex.config.js`, you can also initialize with an empty options object:
 
 ```ts
-import { createClient } from 'mapplerad-sdk';
+import { createClient } from 'maplerad-sdk';
 
 const sdk = createClient({});
 ```
@@ -85,7 +85,7 @@ const fetched = await sdk.api.customers.get({ id: customer.id! });
 If you prefer a class instance, this pattern works the same way:
 
 ```ts
-import { Core } from 'mapplerad-sdk';
+import { Core } from 'maplerad-sdk';
 
 const sdk = new Core({
   environment: 'sandbox',

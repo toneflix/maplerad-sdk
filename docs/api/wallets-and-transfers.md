@@ -53,7 +53,7 @@ const verified = await sdk.api.transfers.get({
 });
 ```
 
-The transfer endpoint is intended for bank transfer, mobile money transfer, and Mapplerad Pay flows funded from your balance.
+The transfer endpoint is intended for bank transfer, mobile money transfer, and Maplerad Pay flows funded from your balance.
 
 ## usdTransfers
 

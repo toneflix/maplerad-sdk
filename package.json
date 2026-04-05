@@ -1,5 +1,5 @@
 {
-  "name": "mapplerad-sdk",
+  "name": "maplerad-sdk",
   "type": "module",
   "version": "0.1.0",
   "private": false,
@@ -7,9 +7,9 @@
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.cts",
-  "homepage": "https://toneflix.github.io/mapplerad-sdk",
+  "homepage": "https://toneflix.github.io/maplerad-sdk",
   "repository": {
-    "url": "https://github.com/toneflix/mapplerad-sdk.git",
+    "url": "https://github.com/toneflix/maplerad-sdk.git",
     "type": "git"
   },
   "publishConfig": {

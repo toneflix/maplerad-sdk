@@ -30,7 +30,7 @@ Use these namespaces to move funds into or out of a card.
 - `sdk.api.fundIssuings.create(params, body)` calls `POST /v1/issuing/{id}/fund`.
 - `sdk.api.withdrawIssuings.create(params, body)` calls `POST /v1/issuing/{id}/withdraw`.
 
-Funding debits your Mapplerad balance and credits the card. Withdrawal does the reverse.
+Funding debits your Maplerad balance and credits the card. Withdrawal does the reverse.
 
 ## freezeIssuings, unfreezeIssuings, and terminateIssuings
 
@@ -71,10 +71,7 @@ const card = await sdk.api.issuings.create({
   customer_id: 'cus_123',
 } as IssuingInput);
 
-const history = await sdk.api.issuingTransactions.list(
-  { id: card.id! },
-  {},
-);
+const history = await sdk.api.issuingTransactions.list({ id: card.id! }, {});
 ```
 
 Use the lifecycle control namespaces together when you need operational safeguards around card usage.

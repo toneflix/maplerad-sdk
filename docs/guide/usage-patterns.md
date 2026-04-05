@@ -11,7 +11,7 @@ These patterns reflect common ways to use the SDK in a real integration service.
 Use `createClient` when you want the smallest amount of setup code.
 
 ```ts
-import { createClient } from 'mapplerad-sdk';
+import { createClient } from 'maplerad-sdk';
 
 const sdk = createClient({
   environment: 'sandbox',
@@ -37,7 +37,7 @@ const sdk = createClient({});
 Use `Core` if you want a named SDK instance that can be passed around explicitly.
 
 ```ts
-import { Core } from 'mapplerad-sdk';
+import { Core } from 'maplerad-sdk';
 
 const sdk = new Core({
   environment: 'sandbox',
@@ -75,7 +75,7 @@ import {
   createClient,
   type CustomerInput,
   type TransferCreateInput,
-} from 'mapplerad-sdk';
+} from 'maplerad-sdk';
 
 const sdk = createClient({});
 
@@ -113,7 +113,7 @@ Use per-request idempotency or tracing headers in your integration layer when yo
 The package re-exports HTTP exception classes from `@oapiex/sdk-kit`.
 
 ```ts
-import { HttpException, UnauthorizedRequestException } from 'mapplerad-sdk';
+import { HttpException, UnauthorizedRequestException } from 'maplerad-sdk';
 
 try {
   await sdk.api.wallets.list();

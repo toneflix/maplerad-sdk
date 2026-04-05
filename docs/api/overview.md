@@ -4,7 +4,7 @@ outline: deep
 
 # API Overview
 
-The Mapplerad SDK groups endpoints under `sdk.api.*` namespaces. Each namespace maps to a generated API class and exposes the methods that are actually available for that resource, such as `create`, `list`, `get`, or `update`.
+The Maplerad SDK groups endpoints under `sdk.api.*` namespaces. Each namespace maps to a generated API class and exposes the methods that are actually available for that resource, such as `create`, `list`, `get`, or `update`.
 
 ## Client Shape
 

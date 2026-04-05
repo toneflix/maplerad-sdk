@@ -36,7 +36,7 @@ Use `sdk.api.enrollCustomers.create(body)` when you want the full customer enrol
 
 - Method: `create(body)`
 - Endpoint: `POST /v1/customers/enroll`
-- Context: Creates a customer with access to broader Mapplerad resources, including issuing.
+- Context: Creates a customer with access to broader Maplerad resources, including issuing.
 
 ## updateCustomers
 

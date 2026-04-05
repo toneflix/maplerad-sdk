@@ -9,7 +9,7 @@ These examples use the same initialization and customer flow patterns described 
 ## Create and Fetch a Customer
 
 ```ts
-import { createClient, type CustomerInput } from 'mapplerad-sdk';
+import { createClient, type CustomerInput } from 'maplerad-sdk';
 
 const sdk = createClient({
   environment: 'sandbox',
@@ -31,7 +31,7 @@ const customer = await sdk.api.customers.get({ id: createdCustomer.id! });
 ## List Business Wallets
 
 ```ts
-import { createClient } from 'mapplerad-sdk';
+import { createClient } from 'maplerad-sdk';
 
 const sdk = createClient({
   environment: 'sandbox',
@@ -44,7 +44,7 @@ const wallets = await sdk.api.wallets.list();
 ## Create a Local Transfer
 
 ```ts
-import { createClient, type TransferCreateInput } from 'mapplerad-sdk';
+import { createClient, type TransferCreateInput } from 'maplerad-sdk';
 
 const sdk = createClient({
   environment: 'sandbox',
@@ -64,7 +64,7 @@ const verifiedTransfer = await sdk.api.transfers.get({
 ## Override Base URLs
 
 ```ts
-import { createClient } from 'mapplerad-sdk';
+import { createClient } from 'maplerad-sdk';
 
 const sdk = createClient({
   environment: 'sandbox',
@@ -75,23 +75,23 @@ const sdk = createClient({
 ## Reuse a Shared SDK Instance
 
 ```ts
-import { createClient } from 'mapplerad-sdk';
+import { createClient } from 'maplerad-sdk';
 
-export const mapplerad = createClient({
+export const maplerad = createClient({
   clientSecret: process.env.MAPLERAD_CLIENT_SECRET!,
   environment: process.env.NODE_ENV === 'production' ? 'live' : 'sandbox',
   timeout: 20_000,
 });
 
 export async function fetchWallets() {
-  return mapplerad.api.wallets.list();
+  return maplerad.api.wallets.list();
 }
 ```
 
 ## Initialize With Core
 
 ```ts
-import { Core } from 'mapplerad-sdk';
+import { Core } from 'maplerad-sdk';
 
 const sdk = new Core({
   clientSecret: process.env.MAPLERAD_CLIENT_SECRET!,

@@ -2,9 +2,9 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  base: process.env.GITHUB_ACTIONS ? '/mapplerad-sdk/' : '/',
-  title: 'Mapplerad SDK',
-  description: 'TypeScript and Node.js SDK for working with the Mapplerad API.',
+  base: process.env.GITHUB_ACTIONS ? '/maplerad-sdk/' : '/',
+  title: 'Maplerad SDK',
+  description: 'TypeScript and Node.js SDK for working with the Maplerad API.',
   themeConfig: {
     nav: [
       { text: 'Guide', link: '/guide/getting-started' },
