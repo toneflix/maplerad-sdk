@@ -48,5 +48,10 @@ export default defineConfig({
     search: {
       provider: 'local',
     },
+    socialLinks: [
+      { icon: 'github', link: 'https://github.com/toneflix/maplerad-sdk' },
+      { icon: 'npm', link: 'https://www.npmjs.com/package/maplerad-sdk' },
+      { icon: 'discord', link: 'https://discord.gg/wQP2CkHj' },
+    ],
   },
 })
