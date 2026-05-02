@@ -38,6 +38,19 @@ Use `sdk.api.enrollCustomers.create(body)` when you want the full customer enrol
 - Endpoint: `POST /v1/customers/enroll`
 - Context: Creates a customer with access to broader Maplerad resources, including issuing.
 
+### Example
+
+```ts
+const enrolledCustomer = await sdk.api.enrollCustomers.create({
+  first_name: 'Ada',
+  last_name: 'Lovelace',
+  email: 'ada@example.com',
+  country: 'NG',
+  dob: '1990-01-01',
+  identification_number: '12345678901',
+});
+```
+
 ## updateCustomers
 
 Use `sdk.api.updateCustomers.update(body)` to update customer information.
@@ -46,6 +59,16 @@ Use `sdk.api.updateCustomers.update(body)` to update customer information.
 - Endpoint: `PATCH /v1/customers/update`
 - Context: Updates an existing customer record.
 
+### Example
+
+```ts
+await sdk.api.updateCustomers.update({
+  customer_id: 'cus_123',
+  first_name: 'Ada',
+  last_name: 'Byron',
+});
+```
+
 ## activeCustomers
 
 Use `sdk.api.activeCustomers.create(params, body)` to whitelist or blacklist a customer.
@@ -53,6 +76,15 @@ Use `sdk.api.activeCustomers.create(params, body)` to whitelist or blacklist a c
 - Method: `create(params, body)`
 - Endpoint: `POST /v1/customers/{customer_id}/active`
 - Context: Changes whether a customer is active for allowed downstream actions.
+
+### Example
+
+```ts
+await sdk.api.activeCustomers.create(
+  { customer_id: 'cus_123' },
+  { blacklist: false },
+);
+```
 
 ## tier1s and tier2s
 
@@ -63,6 +95,29 @@ Use these namespaces when a customer needs to be upgraded for more capabilities.
 
 Tier upgrades are typically relevant before enabling collections, issuing, or higher-limit product flows.
 
+### Example
+
+```ts
+await sdk.api.tier1s.update({
+  customer_id: 'cus_123',
+  dob: '1990-01-01',
+  identification_number: '12345678901',
+  phone: {
+    phone_country_code: '+234',
+    phone_number: '8012345678',
+  },
+});
+
+await sdk.api.tier2s.update({
+  customer_id: 'cus_123',
+  identity: {
+    country: 'NG',
+    type: 'NIN',
+    number: '12345678901',
+  },
+});
+```
+
 ## bvnIdentities
 
 Use `sdk.api.bvnIdentities.create(body)` to verify a BVN.
@@ -70,6 +125,14 @@ Use `sdk.api.bvnIdentities.create(body)` to verify a BVN.
 - Method: `create(body)`
 - Endpoint: `POST /v1/identity/bvn`
 - Context: Validates a BVN and returns its details.
+
+### Example
+
+```ts
+const bvn = await sdk.api.bvnIdentities.create({
+  bvn: '22222222222',
+});
+```
 
 ## customerAccounts
 
@@ -79,6 +142,14 @@ Use `sdk.api.customerAccounts.list(params)` to retrieve accounts created by a cu
 - Endpoint: `GET /v1/customers/{id}/accounts`
 - Context: Useful when you need the funding or account records associated with a customer profile.
 
+### Example
+
+```ts
+const accounts = await sdk.api.customerAccounts.list({
+  id: 'cus_123',
+});
+```
+
 ## customerTransactions
 
 Use `sdk.api.customerTransactions.list(params)` to retrieve the transactions made by a customer.
@@ -86,6 +157,14 @@ Use `sdk.api.customerTransactions.list(params)` to retrieve the transactions mad
 - Method: `list(params)`
 - Endpoint: `GET /v1/customers/{id}/transactions`
 - Context: Good for customer activity views and reconciliation screens.
+
+### Example
+
+```ts
+const transactions = await sdk.api.customerTransactions.list({
+  id: 'cus_123',
+});
+```
 
 ## verifies
 
@@ -95,6 +174,14 @@ Use `sdk.api.verifies.get(params)` to verify a collection transaction by transac
 - Endpoint: `GET /v1/transactions/verify/{id}`
 - Context: Confirms the status of a collection transaction.
 
+### Example
+
+```ts
+const collection = await sdk.api.verifies.get({
+  id: 'txn_123',
+});
+```
+
 ## verifyOtps
 
 Use `sdk.api.verifyOtps.create(body)` when a mobile money collection requires OTP verification.
@@ -102,6 +189,15 @@ Use `sdk.api.verifyOtps.create(body)` when a mobile money collection requires OT
 - Method: `create(body)`
 - Endpoint: `POST /v1/collections/momo/verify-otp`
 - Context: Completes an OTP-gated collection flow.
+
+### Example
+
+```ts
+const verifiedOtp = await sdk.api.verifyOtps.create({
+  transaction_id: 'txn_123',
+  otp: '123456',
+});
+```
 
 ## Related Product Areas
 
