@@ -9,6 +9,8 @@ export default defineConfig({
     outDir: 'dist',
     dts: true,
     sourcemap: false,
-    external: ['@oapiex/sdk-kit', '@h3ravel/shared'],
     clean: true,
+    deps: {
+        neverBundle: ['@oapiex/sdk-kit', '@h3ravel/shared']
+    }
 })
