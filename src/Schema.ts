@@ -282,6 +282,7 @@ export interface EnrollInput {
   country: string
   dob: string
   email: string
+  identity?: Identity
   first_name: string
   identification_number: string
   last_name: string
