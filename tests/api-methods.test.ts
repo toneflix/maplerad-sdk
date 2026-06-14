@@ -170,12 +170,7 @@ describe('generated API methods', () => {
                         identification_number: '12345678901',
                         last_name: 'Customer',
                     }]
-                    : spec.className === 'VirtualAccountCollection' && spec.methodName === 'create'
-                        ? [{
-                            currency: 'NGN',
-                            customer_id: 'customer_existing',
-                        }]
-                : spec.paramNames.map((name) => ({ [`__${name}`]: name }))
+                    : spec.paramNames.map((name) => ({ [`__${name}`]: name }))
             const argsByName = Object.fromEntries(
                 spec.paramNames.map((name, index) => [name, args[index]]),
             )
@@ -189,10 +184,6 @@ describe('generated API methods', () => {
                     .mockResolvedValueOnce({ data: [] })
                     .mockResolvedValueOnce({ data: expectedResponse })
             } else if (spec.className === 'EnrollCustomer' && spec.methodName === 'create') {
-                sendMock
-                    .mockResolvedValueOnce({ data: [] })
-                    .mockResolvedValueOnce({ data: expectedResponse })
-            } else if (spec.className === 'VirtualAccountCollection' && spec.methodName === 'create') {
                 sendMock
                     .mockResolvedValueOnce({ data: [] })
                     .mockResolvedValueOnce({ data: expectedResponse })
@@ -219,15 +210,6 @@ describe('generated API methods', () => {
             ) {
                 expect(validateAccess).toHaveBeenCalledTimes(2)
                 expect(sendMock).toHaveBeenCalledTimes(2)
-            } else if (spec.className === 'VirtualAccountCollection' && spec.methodName === 'create') {
-                expect(validateAccess).toHaveBeenCalledTimes(2)
-                expect(sendMock).toHaveBeenCalledTimes(2)
-                expect(sendMock).toHaveBeenLastCalledWith(
-                    'built-url',
-                    spec.httpMethod,
-                    resolveExpression(spec.bodyExpr, argsByName),
-                    {},
-                )
             } else {
                 expect(validateAccess).toHaveBeenCalledTimes(1)
                 expect(buildTargetUrl).toHaveBeenCalledWith(
