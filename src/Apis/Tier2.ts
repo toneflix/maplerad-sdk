@@ -1,5 +1,6 @@
+import type { Tier2Input, Tier2 as Tier2Model } from '../Schema'
+
 import { BaseApi } from '../BaseApi'
-import type { Tier2 as Tier2Model, Tier2Input } from '../Schema'
 import { Http } from '@oapiex/sdk-kit'
 
 export class Tier2 extends BaseApi {
