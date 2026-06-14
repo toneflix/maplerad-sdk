@@ -89,7 +89,20 @@ export const createClient = (
         },
     }
 
-    return createBoundSdk(extractedApiDocumentSdk, options) as KitCore & { api: KitBaseApi & ExtractedApiDocumentApi }
+    const client = createBoundSdk(extractedApiDocumentSdk, options) as KitCore & { api: KitBaseApi & ExtractedApiDocumentApi }
+    const createCustomer = client.api.customers.create.bind(client.api.customers)
+    const listCustomers = client.api.customers.list.bind(client.api.customers)
+
+    client.api.customers.create = async body => {
+        const customers = await listCustomers({ email: body.email })
+        const existingCustomer = customers.find(customer =>
+            customer.email?.toLowerCase() === body.email.toLowerCase()
+        )
+
+        return existingCustomer ?? await createCustomer(body)
+    }
+
+    return client
 }
 
 setConfigFileBasename('maplerad.config')

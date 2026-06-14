@@ -1,5 +1,6 @@
+import type { CustomerByIdParams, CustomerInput, Customer as CustomerModel, CustomerQuery } from '../Schema'
+
 import { BaseApi } from '../BaseApi'
-import type { Customer as CustomerModel, CustomerByIdParams, CustomerInput, CustomerQuery } from '../Schema'
 import { Http } from '@oapiex/sdk-kit'
 
 export class Customer extends BaseApi {
@@ -17,6 +18,14 @@ export class Customer extends BaseApi {
      */
     async create (body: CustomerInput): Promise<CustomerModel> {
         await this.core.validateAccess()
+
+        const customers = await this.list({ email: body.email })
+
+        const existingCustomer = customers.find(c =>
+            c.email?.toLowerCase() === body.email.toLowerCase()
+        )
+
+        if (existingCustomer) return existingCustomer
 
         const { data } = await Http.send<CustomerModel>(
             this.core.builder.buildTargetUrl('/v1/customers', {}, {}),

@@ -4,10 +4,21 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 import fs from 'node:fs/promises'
 
-const { sendMock, createSdkMock, getConfigMock, updateConfigMock } = vi.hoisted(
+const { sendMock, createSdkMock, generatedCustomerCreateMock, generatedCustomerListMock, getConfigMock, updateConfigMock } = vi.hoisted(
     () => ({
         sendMock: vi.fn(),
-        createSdkMock: vi.fn((bundle, options) => ({ api: {}, bundle, options })),
+        generatedCustomerCreateMock: vi.fn(),
+        generatedCustomerListMock: vi.fn(),
+        createSdkMock: vi.fn((bundle, options) => ({
+            api: {
+                customers: {
+                    create: generatedCustomerCreateMock,
+                    list: generatedCustomerListMock,
+                },
+            },
+            bundle,
+            options,
+        })),
         getConfigMock: vi.fn(() => ({})),
         updateConfigMock: vi.fn(),
     }),
@@ -143,7 +154,14 @@ describe('generated API methods', () => {
                 },
             } as any
 
-            const args = spec.paramNames.map((name) => ({ [`__${name}`]: name }))
+            const args = spec.className === 'Customer' && spec.methodName === 'create'
+                ? [{
+                    country: 'NG',
+                    email: 'customer@example.test',
+                    first_name: 'Test',
+                    last_name: 'Customer',
+                }]
+                : spec.paramNames.map((name) => ({ [`__${name}`]: name }))
             const argsByName = Object.fromEntries(
                 spec.paramNames.map((name, index) => [name, args[index]]),
             )
@@ -152,7 +170,13 @@ describe('generated API methods', () => {
                 methodName: spec.methodName,
             }
 
-            sendMock.mockResolvedValueOnce({ data: expectedResponse })
+            if (spec.className === 'Customer' && spec.methodName === 'create') {
+                sendMock
+                    .mockResolvedValueOnce({ data: [] })
+                    .mockResolvedValueOnce({ data: expectedResponse })
+            } else {
+                sendMock.mockResolvedValueOnce({ data: expectedResponse })
+            }
 
             const loadModule = apiModules[`../src/Apis/${spec.fileName}`]
 
@@ -167,18 +191,23 @@ describe('generated API methods', () => {
             const instance = new ApiClass(core)
             const result = await instance[spec.methodName](...args)
 
-            expect(validateAccess).toHaveBeenCalledTimes(1)
-            expect(buildTargetUrl).toHaveBeenCalledWith(
-                spec.urlPath,
-                resolveExpression(spec.urlParamsExpr, argsByName),
-                resolveExpression(spec.urlQueryExpr, argsByName),
-            )
-            expect(sendMock).toHaveBeenCalledWith(
-                'built-url',
-                spec.httpMethod,
-                resolveExpression(spec.bodyExpr, argsByName),
-                {},
-            )
+            if (spec.className === 'Customer' && spec.methodName === 'create') {
+                expect(validateAccess).toHaveBeenCalledTimes(2)
+                expect(sendMock).toHaveBeenCalledTimes(2)
+            } else {
+                expect(validateAccess).toHaveBeenCalledTimes(1)
+                expect(buildTargetUrl).toHaveBeenCalledWith(
+                    spec.urlPath,
+                    resolveExpression(spec.urlParamsExpr, argsByName),
+                    resolveExpression(spec.urlQueryExpr, argsByName),
+                )
+                expect(sendMock).toHaveBeenCalledWith(
+                    'built-url',
+                    spec.httpMethod,
+                    resolveExpression(spec.bodyExpr, argsByName),
+                    {},
+                )
+            }
             expect(result).toEqual(expectedResponse)
         })
     }
@@ -187,6 +216,8 @@ describe('generated API methods', () => {
 describe('runtime helpers', () => {
     beforeEach(() => {
         createSdkMock.mockClear()
+        generatedCustomerCreateMock.mockReset()
+        generatedCustomerListMock.mockReset()
         getConfigMock.mockReset()
         getConfigMock.mockReturnValue({
             clientSecret: 'config-secret',
@@ -244,5 +275,23 @@ describe('runtime helpers', () => {
                 },
             }),
         )
+    })
+
+    it('createClient deduplicates customer creation by email', async () => {
+        const existingCustomer = {
+            id: 'customer_existing',
+            email: 'customer@example.test',
+        }
+        generatedCustomerListMock.mockResolvedValue([existingCustomer])
+        const client = sdk.createClient({})
+
+        await expect(client.api.customers.create({
+            country: 'NG',
+            email: 'customer@example.test',
+            first_name: 'Existing',
+            last_name: 'Customer',
+        })).resolves.toEqual(existingCustomer)
+        expect(generatedCustomerListMock).toHaveBeenCalledWith({ email: existingCustomer.email })
+        expect(generatedCustomerCreateMock).not.toHaveBeenCalled()
     })
 })
