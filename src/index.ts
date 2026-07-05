@@ -66,6 +66,12 @@ export { VirtualAccountStatus as VirtualAccountStatusApi } from './Apis/VirtualA
 export { Wallet as WalletApi } from './Apis/Wallet'
 export { WithdrawIssuing as WithdrawIssuingApi } from './Apis/WithdrawIssuing'
 export { Core } from './Core'
+export { MapleradWebhooks, MapleradWebhookError } from './Webhooks'
+export type {
+  MapleradWebhookEvent,
+  MapleradWebhookHeaders,
+  WebhookVerifyOptions,
+} from './Webhooks'
 
 export const securitySchemes = extractedApiDocumentManifest.securitySchemes
 export const security = extractedApiDocumentManifest.security
