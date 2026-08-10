@@ -7,7 +7,6 @@ export class Core extends KitCore {
 
     declare api: ApiBinder
 
-
     /**
      * Creates an instance of Core.
      * 

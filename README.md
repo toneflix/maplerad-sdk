@@ -72,7 +72,11 @@ With defaults in place, this works too:
 ```ts
 import { createClient } from 'maplerad-sdk';
 
-const sdk = createClient({});
+const sdk = createClient({
+  clientSecret: process.env.MAPLERAD_CLIENT_SECRET,
+  environment: 'sandbox',
+  debugLevel: 3,
+});
 ```
 
 ## Example Customer Flow
