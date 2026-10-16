@@ -1,6 +1,5 @@
 import { BaseApi } from '../BaseApi'
 import type { KycLinkInput, Usd } from '../Schema'
-import { Http } from '@oapiex/sdk-kit'
 
 export class KycLink extends BaseApi {
 
@@ -18,7 +17,7 @@ export class KycLink extends BaseApi {
     async create (body: KycLinkInput): Promise<Usd> {
         await this.core.validateAccess()
 
-        const { data } = await Http.send<Usd>(
+        const { data } = await this.core.http.send<Usd>(
             this.core.builder.buildTargetUrl('/v1/collections/usd/kyc_link', {}, {}),
             'POST',
             body ?? {},

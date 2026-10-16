@@ -149,6 +149,7 @@ describe('generated API methods', () => {
             const buildTargetUrl = vi.fn().mockReturnValue('built-url')
             const core = {
                 validateAccess,
+                http: { send: sendMock },
                 builder: {
                     buildTargetUrl,
                 },
@@ -246,17 +247,13 @@ describe('runtime helpers', () => {
         })
     })
 
-    it('updates shared runtime defaults on module load', () => {
-        expect(updateConfigMock).toHaveBeenCalledWith({
-            urls: {
-                live: 'https://api.maplerad.com',
-                sandbox: 'https://api.maplerad.com',
-            },
-        })
+    it('leaves the shared kit config alone on module load', () => {
+        // Writing defaults there used to leak Maplerad's URLs into other SDKs' clients.
+        expect(updateConfigMock).not.toHaveBeenCalled()
     })
 
-    it('createClient merges config defaults and explicit options before binding the runtime sdk', () => {
-        sdk.createClient({
+    it('createClient builds a Maplerad client from its own options', () => {
+        const client = sdk.createClient({
             environment: 'sandbox',
             clientSecret: 'option-secret',
             headers: {
@@ -271,26 +268,24 @@ describe('runtime helpers', () => {
             },
         })
 
-        expect(createSdkMock).toHaveBeenCalledTimes(1)
-        expect(createSdkMock).toHaveBeenCalledWith(
-            sdk.extractedApiDocumentSdk,
-            expect.objectContaining({
-                environment: 'sandbox',
-                clientSecret: 'option-secret',
-                headers: {
-                    'x-request-id': 'trace-id',
-                },
-                urls: {
-                    live: 'https://live-config.example.com',
-                    sandbox: 'https://sandbox.example.com',
-                },
-                auth: {
-                    type: 'bearer',
-                    token: 'option-token',
-                    prefix: 'Bearer',
-                },
-            }),
-        )
+        expect(client).toBeInstanceOf(sdk.Core)
+        expect(createSdkMock).not.toHaveBeenCalled()
+        expect(client.getConfig()).toMatchObject({
+            environment: 'sandbox',
+            headers: { 'x-request-id': 'trace-id' },
+            urls: {
+                live: 'https://api.maplerad.com',
+                sandbox: 'https://sandbox.example.com',
+            },
+            auth: { type: 'bearer', token: 'option-token' },
+        })
+        expect(client.builder.baseUrl()).toBe('https://sandbox.example.com/')
+    })
+
+    it('createClient falls back to the client secret for bearer auth', () => {
+        const client = sdk.createClient({ clientSecret: 'option-secret' })
+
+        expect(client.getConfig().auth).toEqual({ type: 'bearer', token: 'option-secret' })
     })
 
     it('createClient deduplicates customer creation by email', async () => {
@@ -298,8 +293,12 @@ describe('runtime helpers', () => {
             id: 'customer_existing',
             email: 'customer@example.test',
         }
-        generatedCustomerListMock.mockResolvedValue([existingCustomer])
-        const client = sdk.createClient({})
+        const client = sdk.createClient({ clientSecret: 'option-secret' })
+        const send = vi.spyOn(client.http, 'send').mockResolvedValue({
+            success: true,
+            message: 'ok',
+            data: [existingCustomer],
+        })
 
         await expect(client.api.customers.create({
             country: 'NG',
@@ -307,7 +306,8 @@ describe('runtime helpers', () => {
             first_name: 'Existing',
             last_name: 'Customer',
         })).resolves.toEqual(existingCustomer)
-        expect(generatedCustomerListMock).toHaveBeenCalledWith({ email: existingCustomer.email })
-        expect(generatedCustomerCreateMock).not.toHaveBeenCalled()
+        expect(send).toHaveBeenCalledTimes(1)
+        expect(send.mock.calls[0][0]).toContain('email=customer%40example.test')
+        expect(send.mock.calls[0][1]).toBe('GET')
     })
 })

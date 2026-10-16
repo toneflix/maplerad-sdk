@@ -1,5 +1,5 @@
 import type { InitOptions, BaseApi as KitBaseApi, Core as KitCore } from '@oapiex/sdk-kit'
-import { createSdk as createBoundSdk, getConfig, setConfigFileBasename, updateConfig } from '@oapiex/sdk-kit'
+import { Core } from './Core'
 import { extractedApiDocumentManifest, extractedApiDocumentSdk } from './Schema'
 
 import type { ExtractedApiDocumentApi } from './Schema'
@@ -65,7 +65,7 @@ export { VirtualAccountRail as VirtualAccountRailApi } from './Apis/VirtualAccou
 export { VirtualAccountStatus as VirtualAccountStatusApi } from './Apis/VirtualAccountStatus'
 export { Wallet as WalletApi } from './Apis/Wallet'
 export { WithdrawIssuing as WithdrawIssuingApi } from './Apis/WithdrawIssuing'
-export { Core } from './Core'
+export { Core, MAPLERAD_URLS } from './Core'
 export { MapleradWebhooks, MapleradWebhookError } from './Webhooks'
 export type {
   MapleradWebhookEvent,
@@ -75,27 +75,19 @@ export type {
 
 export const securitySchemes = extractedApiDocumentManifest.securitySchemes
 export const security = extractedApiDocumentManifest.security
+/**
+ * Create a Maplerad client backed by the runtime manifest. It is a Maplerad
+ * `Core`, so it reads `maplerad.config.*` and `MAPLERAD_CLIENT_SECRET` the same
+ * way, and keeps its own config apart from any other client in the process.
+ *
+ * @param options
+ */
 export const createClient = (
-    options: InitOptions
+    options: InitOptions = {}
 ): KitCore & { api: KitBaseApi & ExtractedApiDocumentApi } => {
-    const config = getConfig()
-    options = {
-        ...options,
-        auth: {
-            type: 'bearer',
-            token: config.clientSecret ?? (config.auth as any)?.token ?? (options.auth as any)?.token ?? options.clientSecret ?? process.env.MAPLERAD_CLIENT_SECRET!,
-            ...config.auth,
-            ...options.auth,
-        } as never,
-        urls: {
-            live: 'https://api.maplerad.com',
-            sandbox: 'https://api.maplerad.com',
-            ...config.urls,
-            ...options.urls,
-        },
+    const client = new Core(options).useDocument(extractedApiDocumentSdk) as unknown as KitCore & {
+        api: KitBaseApi & ExtractedApiDocumentApi
     }
-
-    const client = createBoundSdk(extractedApiDocumentSdk, options) as KitCore & { api: KitBaseApi & ExtractedApiDocumentApi }
     const createCustomer = client.api.customers.create.bind(client.api.customers)
     const listCustomers = client.api.customers.list.bind(client.api.customers)
 
@@ -111,14 +103,6 @@ export const createClient = (
     return client
 }
 
-setConfigFileBasename('maplerad.config')
-
-updateConfig({
-    urls: {
-        live: 'https://api.maplerad.com',
-        sandbox: 'https://api.maplerad.com',
-    },
-})
 
 export {
     BadRequestException,

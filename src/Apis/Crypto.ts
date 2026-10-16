@@ -1,6 +1,5 @@
 import { BaseApi } from '../BaseApi'
 import type { Active, Crypto as CryptoModel, CryptoByAddressIdParams, CryptoByIdInput, CryptoInput, CustomerByIdParams } from '../Schema'
-import { Http } from '@oapiex/sdk-kit'
 
 export class Crypto extends BaseApi {
 
@@ -18,7 +17,7 @@ export class Crypto extends BaseApi {
     async create (body: CryptoInput): Promise<CryptoModel> {
         await this.core.validateAccess()
 
-        const { data } = await Http.send<CryptoModel>(
+        const { data } = await this.core.http.send<CryptoModel>(
             this.core.builder.buildTargetUrl('/v1/crypto', {}, {}),
             'POST',
             body ?? {},
@@ -40,7 +39,7 @@ export class Crypto extends BaseApi {
     async get (params: CryptoByAddressIdParams): Promise<CryptoModel> {
         await this.core.validateAccess()
 
-        const { data } = await Http.send<CryptoModel>(
+        const { data } = await this.core.http.send<CryptoModel>(
             this.core.builder.buildTargetUrl('/v1/crypto/{address_id}', params, {}),
             'GET',
             {},
@@ -61,7 +60,7 @@ export class Crypto extends BaseApi {
     async update (params: CustomerByIdParams, body: CryptoByIdInput): Promise<Active> {
         await this.core.validateAccess()
 
-        const { data } = await Http.send<Active>(
+        const { data } = await this.core.http.send<Active>(
             this.core.builder.buildTargetUrl('/v1/crypto/:id', params, {}),
             'PATCH',
             body ?? {},

@@ -1,6 +1,5 @@
 import { BaseApi } from '../BaseApi'
 import type { Airtime, AirtimeInput } from '../Schema'
-import { Http } from '@oapiex/sdk-kit'
 
 export class AirtimeBill extends BaseApi {
 
@@ -18,7 +17,7 @@ export class AirtimeBill extends BaseApi {
     async create (body: AirtimeInput): Promise<Airtime> {
         await this.core.validateAccess()
 
-        const { data } = await Http.send<Airtime>(
+        const { data } = await this.core.http.send<Airtime>(
             this.core.builder.buildTargetUrl('/v1/bills/airtime', {}, {}),
             'POST',
             body ?? {},
@@ -40,7 +39,7 @@ export class AirtimeBill extends BaseApi {
     async list (): Promise<Airtime[]> {
         await this.core.validateAccess()
 
-        const { data } = await Http.send<Airtime[]>(
+        const { data } = await this.core.http.send<Airtime[]>(
             this.core.builder.buildTargetUrl('/v1/bills/airtime', {}, {}),
             'GET',
             {},

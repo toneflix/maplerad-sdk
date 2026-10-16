@@ -1,6 +1,5 @@
 import { BaseApi } from '../BaseApi'
 import type { CustomerByIdParams, Issuing as IssuingModel, IssuingGetIssuingQuery, IssuingInput } from '../Schema'
-import { Http } from '@oapiex/sdk-kit'
 
 export class Issuing extends BaseApi {
 
@@ -18,7 +17,7 @@ export class Issuing extends BaseApi {
     async create (body: IssuingInput): Promise<IssuingModel> {
         await this.core.validateAccess()
 
-        const { data } = await Http.send<IssuingModel>(
+        const { data } = await this.core.http.send<IssuingModel>(
             this.core.builder.buildTargetUrl('/v1/issuing', {}, {}),
             'POST',
             body ?? {},
@@ -42,7 +41,7 @@ export class Issuing extends BaseApi {
     async list (query: IssuingGetIssuingQuery): Promise<IssuingModel[]> {
         await this.core.validateAccess()
 
-        const { data } = await Http.send<IssuingModel[]>(
+        const { data } = await this.core.http.send<IssuingModel[]>(
             this.core.builder.buildTargetUrl('/v1/issuing', {}, query),
             'GET',
             {},
@@ -66,7 +65,7 @@ export class Issuing extends BaseApi {
     async get (params: CustomerByIdParams): Promise<IssuingModel> {
         await this.core.validateAccess()
 
-        const { data } = await Http.send<IssuingModel>(
+        const { data } = await this.core.http.send<IssuingModel>(
             this.core.builder.buildTargetUrl('/v1/issuing/{id}', params, {}),
             'GET',
             {},

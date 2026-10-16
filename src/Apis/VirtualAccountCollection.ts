@@ -1,7 +1,6 @@
 import type { CustomerAccount, CustomerByIdParams, VirtualAccountById, VirtualAccountInput } from '../Schema'
 
 import { BaseApi } from '../BaseApi'
-import { Http } from '@oapiex/sdk-kit'
 
 export class VirtualAccountCollection extends BaseApi {
 
@@ -19,7 +18,7 @@ export class VirtualAccountCollection extends BaseApi {
     async create (body: VirtualAccountInput): Promise<CustomerAccount> {
         await this.core.validateAccess()
 
-        const { data } = await Http.send<CustomerAccount>(
+        const { data } = await this.core.http.send<CustomerAccount>(
             this.core.builder.buildTargetUrl('/v1/collections/virtual-account', {}, {}),
             'POST',
             body ?? {},
@@ -43,7 +42,7 @@ export class VirtualAccountCollection extends BaseApi {
     async get (params: CustomerByIdParams): Promise<VirtualAccountById> {
         await this.core.validateAccess()
 
-        const { data } = await Http.send<VirtualAccountById>(
+        const { data } = await this.core.http.send<VirtualAccountById>(
             this.core.builder.buildTargetUrl('/v1/collections/virtual-account/{id}', params, {}),
             'GET',
             {},

@@ -29,6 +29,7 @@ describe('Customer.create', () => {
     const buildTargetUrl = vi.fn((path, _params, query) => `${path}?${new URLSearchParams(query).toString()}`)
     const customerApi = new Customer({
         validateAccess,
+        http: { send: sendMock },
         builder: { buildTargetUrl },
     } as any)
 

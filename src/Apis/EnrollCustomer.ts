@@ -2,7 +2,6 @@ import type { Customer as CustomerModel, EnrollInput } from '../Schema'
 
 import { BaseApi } from '../BaseApi'
 import { Customer } from './Customer'
-import { Http } from '@oapiex/sdk-kit'
 import { Tier1 } from './Tier1'
 import { Tier2 } from './Tier2'
 
@@ -52,7 +51,7 @@ export class EnrollCustomer extends BaseApi {
             return customer
         }
 
-        const { data } = await Http.send<CustomerModel>(
+        const { data } = await this.core.http.send<CustomerModel>(
             this.core.builder.buildTargetUrl('/v1/customers/enroll', {}, {}),
             'POST',
             body ?? {},

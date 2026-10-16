@@ -42,6 +42,7 @@ describe('EnrollCustomer.create', () => {
     const buildTargetUrl = vi.fn().mockImplementation(path => path)
     const enrollmentApi = new EnrollCustomer({
         validateAccess,
+        http: { send: sendMock },
         builder: { buildTargetUrl },
     } as any)
 

@@ -1,7 +1,7 @@
 {
   "name": "maplerad-sdk",
   "type": "module",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "private": false,
   "description": "NodeJs SDK for Maplerad API.",
   "main": "./dist/index.cjs",
@@ -37,7 +37,7 @@
   },
   "dependencies": {
     "@h3ravel/shared": "^0.27.13",
-    "@oapiex/sdk-kit": "^0.1.14"
+    "@oapiex/sdk-kit": "^0.2.1"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
@@ -45,11 +45,11 @@
     "@faker-js/faker": "^10.4.0",
     "@types/node": "^25.8.0",
     "@vitest/coverage-v8": "^4.1.6",
-    "vitepress": "^1.6.4",
     "eslint": "^10.3.0",
     "tsdown": "^0.22.0",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.59.3",
+    "vitepress": "^1.6.4",
     "vitest": "^4.1.6"
   }
 }

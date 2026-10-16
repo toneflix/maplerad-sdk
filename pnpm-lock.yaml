@@ -12,8 +12,8 @@ importers:
         specifier: ^0.27.13
         version: 0.27.13(@types/node@25.8.0)
       '@oapiex/sdk-kit':
-        specifier: ^0.1.14
-        version: 0.1.14
+        specifier: ^0.2.1
+        version: 0.2.1
     devDependencies:
       '@eslint/js':
         specifier: ^10.0.1
@@ -745,8 +745,8 @@ packages:
       '@emnapi/core': ^1.7.1
       '@emnapi/runtime': ^1.7.1
 
-  '@oapiex/sdk-kit@0.1.14':
-    resolution: {integrity: sha512-wvZneUiiaMYP9klzv0+X5pYtamEHx6RqCGbo4t5I3jYi1LsEMxrcMGDnt/N3sGaqGVefbDaMCpN3RGaU86tJ7A==}
+  '@oapiex/sdk-kit@0.2.1':
+    resolution: {integrity: sha512-1PZrrAGbeTNR3YMGB0k58cM3Q7P7artm1DZ8RogkYuUq/78jgFSizeUxuRuaHS9OmOLzfCy8uBKOYBMB8869qQ==}
 
   '@oxc-project/types@0.122.0':
     resolution: {integrity: sha512-oLAl5kBpV4w69UtFZ9xqcmTi+GENWOcPF7FCrczTiBbmC0ibXxCwyvZGbO39rCVEuLGAZM84DH0pUIyyv/YJzA==}
@@ -3360,7 +3360,7 @@ snapshots:
       '@tybys/wasm-util': 0.10.1
     optional: true
 
-  '@oapiex/sdk-kit@0.1.14':
+  '@oapiex/sdk-kit@0.2.1':
     dependencies:
       axios: 1.14.0
       dotenv: 17.4.0

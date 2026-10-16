@@ -1,6 +1,5 @@
 import { BaseApi } from '../BaseApi'
 import type { Counterparty as CounterpartyModel, CounterpartyByCounterPartyIdParams, CounterpartyInput, CustomerByIdParams } from '../Schema'
-import { Http } from '@oapiex/sdk-kit'
 
 export class Counterparty extends BaseApi {
 
@@ -18,7 +17,7 @@ export class Counterparty extends BaseApi {
     async create (body: CounterpartyInput): Promise<CounterpartyModel> {
         await this.core.validateAccess()
 
-        const { data } = await Http.send<CounterpartyModel>(
+        const { data } = await this.core.http.send<CounterpartyModel>(
             this.core.builder.buildTargetUrl('/v1/collections/virtual-account/counterparties', {}, {}),
             'POST',
             body ?? {},
@@ -40,7 +39,7 @@ export class Counterparty extends BaseApi {
     async get (params: CounterpartyByCounterPartyIdParams): Promise<CounterpartyModel[]> {
         await this.core.validateAccess()
 
-        const { data } = await Http.send<CounterpartyModel[]>(
+        const { data } = await this.core.http.send<CounterpartyModel[]>(
             this.core.builder.buildTargetUrl('/v1/collections/virtual-account/counterparties/{counter_party_id}', params, {}),
             'GET',
             {},
@@ -62,7 +61,7 @@ export class Counterparty extends BaseApi {
     async list (params: CustomerByIdParams): Promise<CounterpartyModel[]> {
         await this.core.validateAccess()
 
-        const { data } = await Http.send<CounterpartyModel[]>(
+        const { data } = await this.core.http.send<CounterpartyModel[]>(
             this.core.builder.buildTargetUrl('/v1/collections/virtual-account/{id}/counterparties', params, {}),
             'GET',
             {},

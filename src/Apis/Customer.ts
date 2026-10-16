@@ -1,7 +1,6 @@
 import type { CustomerByIdParams, CustomerInput, Customer as CustomerModel, CustomerQuery } from '../Schema'
 
 import { BaseApi } from '../BaseApi'
-import { Http } from '@oapiex/sdk-kit'
 
 export class Customer extends BaseApi {
 
@@ -27,7 +26,7 @@ export class Customer extends BaseApi {
 
         if (existingCustomer) return existingCustomer
 
-        const { data } = await Http.send<CustomerModel>(
+        const { data } = await this.core.http.send<CustomerModel>(
             this.core.builder.buildTargetUrl('/v1/customers', {}, {}),
             'POST',
             body ?? {},
@@ -51,7 +50,7 @@ export class Customer extends BaseApi {
     async list (query: CustomerQuery): Promise<CustomerModel[]> {
         await this.core.validateAccess()
 
-        const { data } = await Http.send<CustomerModel[]>(
+        const { data } = await this.core.http.send<CustomerModel[]>(
             this.core.builder.buildTargetUrl('/v1/customers', {}, query),
             'GET',
             {},
@@ -75,7 +74,7 @@ export class Customer extends BaseApi {
     async get (params: CustomerByIdParams): Promise<CustomerModel> {
         await this.core.validateAccess()
 
-        const { data } = await Http.send<CustomerModel>(
+        const { data } = await this.core.http.send<CustomerModel>(
             this.core.builder.buildTargetUrl('/v1/customers/{id}', params, {}),
             'GET',
             {},

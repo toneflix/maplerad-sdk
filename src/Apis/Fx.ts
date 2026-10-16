@@ -1,6 +1,5 @@
 import { BaseApi } from '../BaseApi'
 import type { Active, Fx as FxModel, FxInput } from '../Schema'
-import { Http } from '@oapiex/sdk-kit'
 
 export class Fx extends BaseApi {
 
@@ -18,7 +17,7 @@ export class Fx extends BaseApi {
     async create (body: FxInput): Promise<FxModel> {
         await this.core.validateAccess()
 
-        const { data } = await Http.send<FxModel>(
+        const { data } = await this.core.http.send<FxModel>(
             this.core.builder.buildTargetUrl('/v1/fx', {}, {}),
             'POST',
             body ?? {},
@@ -40,7 +39,7 @@ export class Fx extends BaseApi {
     async list (): Promise<Active> {
         await this.core.validateAccess()
 
-        const { data } = await Http.send<Active>(
+        const { data } = await this.core.http.send<Active>(
             this.core.builder.buildTargetUrl('/v1/fx', {}, {}),
             'GET',
             {},
